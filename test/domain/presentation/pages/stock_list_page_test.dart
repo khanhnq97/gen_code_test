@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:your_app/domain/entities/stock_item.dart';
-import 'package:your_app/presentation/bloc/stock_bloc.dart';
-import 'package:your_app/presentation/bloc/stock_state.dart';
-import 'package:your_app/presentation/pages/stock_list_page.dart';
+import 'package:test_app/domain/entities/stock_item.dart';
+import 'package:test_app/presentation/bloc/stock_bloc.dart';
+import 'package:test_app/presentation/bloc/stock_state.dart';
+import 'package:test_app/presentation/pages/stock_list_page.dart';
 
 class MockStockBloc extends Mock implements StockBloc {}
 
@@ -24,7 +24,7 @@ void main() {
       MaterialApp(
         home: BlocProvider<StockBloc>.value(
           value: mockStockBloc,
-          child: StockListPage(),
+          child: const StockListPage(),
         ),
       ),
     );
@@ -43,7 +43,7 @@ void main() {
       MaterialApp(
         home: BlocProvider<StockBloc>.value(
           value: mockStockBloc,
-          child: StockListPage(),
+          child: const StockListPage(),
         ),
       ),
     );

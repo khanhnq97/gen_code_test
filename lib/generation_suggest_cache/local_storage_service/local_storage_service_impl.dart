@@ -1,25 +1,9 @@
 import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_app/generation_suggest_cache/model.dart';
 
-// Interface cho Local Storage Service
-abstract class LocalStorageService {
-  Future<String?> getStockMasterHash();
-
-  Future<String?> getSuggestHash();
-
-  Future<bool> saveStockMasterResponse(StockMasterResponse response);
-
-  Future<bool> saveSuggestDictionaryResponse(
-      SuggestDictionaryResponse response);
-
-  Future<bool> saveStockMasterHash(String hash);
-
-  Future<bool> saveSuggestHash(String hash);
-
-  Future<StockMaster?> getStockMaster();
-
-  Future<SuggestDictionary?> getSuggestDictionary();
-}
+import 'local_storage_service.dart';
 
 class LocalStorageServiceImpl implements LocalStorageService {
   static const String _stockMasterHashKey = 'stock_master_hash';

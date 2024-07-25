@@ -1,6 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:test_app/generation_suggest_cache/suggest_cache_service/suggest_cache_service.dart';
+
+import 'api_service/api_service.dart';
+import 'local_storage_service/local_storage_service.dart';
+import 'model.dart';
 
 class SuggestCacheGenerator {
   final LocalStorageService _localStorage;
@@ -102,63 +107,4 @@ class SuggestCacheGenerator {
       );
     }).toList();
   }
-}
-
-// Interface cho Local Storage Service
-abstract class LocalStorageService {
-  Future<String?> getStockMasterHash();
-
-  Future<String?> getSuggestHash();
-
-  Future<bool> saveStockMasterResponse(StockMasterResponse response);
-
-  Future<bool> saveSuggestDictionaryResponse(
-      SuggestDictionaryResponse response);
-
-  Future<bool> saveStockMasterHash(String hash);
-
-  Future<bool> saveSuggestHash(String hash);
-
-  Future<StockMaster?> getStockMaster();
-
-  Future<SuggestDictionary?> getSuggestDictionary();
-}
-
-// Interface cho API Service
-abstract class ApiService {
-  Future<StockMasterResponse?> getStockMaster(String? hash);
-
-  Future<SuggestDictionaryResponse?> getSuggestDictionary(String? hash);
-}
-
-// Interface cho Suggest Cache Service
-abstract class SuggestCacheService {
-  Future<bool> isSuggestCacheComplete();
-
-  Future<void> saveSuggestCache(List<SuggestItem> suggestCache);
-}
-
-// Model classes (Bạn cần định nghĩa chi tiết cho các class này)
-class StockMasterResponse {
-  final bool updateFlag;
-  final String hash;
-// Thêm các trường khác nếu cần
-}
-
-class SuggestDictionaryResponse {
-  final bool updateFlag;
-  final String hash;
-// Thêm các trường khác nếu cần
-}
-
-class StockMaster {
-  // Định nghĩa các trường của StockMaster
-}
-
-class SuggestDictionary {
-  // Định nghĩa các trường của SuggestDictionary
-}
-
-class SuggestItem {
-  // Định nghĩa các trường của SuggestItem
 }

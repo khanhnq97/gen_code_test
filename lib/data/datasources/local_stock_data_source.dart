@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../generation_suggest_cache/model.dart';
+import '../../generation_suggest_cache/suggest_cache_service/suggest_cache_service_impl.dart';
 import '../models/stock_item_model.dart';
 
 abstract class LocalStockDataSource {
@@ -17,11 +19,13 @@ class LocalStockDataSourceImpl implements LocalStockDataSource {
 
   @override
   Future<List<StockItemModel>> getStockItems() async {
-    final jsonString = sharedPreferences.getString('CACHED_STOCK_ITEMS');
+    final jsonString =
+        sharedPreferences.getString(SuggestCacheServiceImpl.suggestCacheKey);
     if (jsonString != null) {
-      return (json.decode(jsonString) as List)
-          .map((item) => StockItemModel.fromJson(item))
+      final suggestItemList = (json.decode(jsonString) as List)
+          .map((item) => SuggestItem.fromJson(item))
           .toList();
+      return suggestItemsToStockItems(suggestItemList);
     } else {
       throw CacheException();
     }
@@ -37,3 +41,13 @@ class LocalStockDataSourceImpl implements LocalStockDataSource {
 }
 
 class CacheException implements Exception {}
+
+List<StockItemModel> suggestItemsToStockItems(List<SuggestItem> suggestItems) {
+  return suggestItems
+      .map((item) => StockItemModel(
+            name: item.name,
+            symbol: item.symbol,
+            firstKeyword: item.keywordList.first,
+          ))
+      .toList();
+}

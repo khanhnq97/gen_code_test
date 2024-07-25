@@ -7,14 +7,16 @@ import '../bloc/stock_state.dart';
 import '../widgets/stock_item_widget.dart';
 
 class StockListPage extends StatelessWidget {
+  const StockListPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stock List'),
+        title: const Text('Stock List'),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: () {
               BlocProvider.of<StockBloc>(context).add(GetStockItemsEvent());
             },
@@ -22,12 +24,27 @@ class StockListPage extends StatelessWidget {
         ],
       ),
       body: BlocBuilder<StockBloc, StockState>(
+        buildWhen: (previousState, state) {
+          // return true/false to determine whether or not
+          // to rebuild the widget with state
+          // if (state is StockInitial) {
+          //   return true;
+          // } else if (state is StockLoading) {
+          //   return true;
+          // } else if (state is StockLoaded) {
+          //   return true;
+          // } else if (state is StockError) {
+          //   return true;
+          // }
+          // return false;
+          return previousState != state;
+        },
         builder: (context, state) {
           if (state is StockInitial) {
             BlocProvider.of<StockBloc>(context).add(GetStockItemsEvent());
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is StockLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is StockLoaded) {
             return ListView.builder(
               itemCount: state.stockItems.length,

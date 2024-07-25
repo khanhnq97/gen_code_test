@@ -1,19 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:your_app/domain/entities/stock_item.dart';
-import 'package:your_app/domain/repositories/stock_repository.dart';
-import 'package:your_app/domain/usecases/get_stock_items.dart';
+import 'package:test_app/domain/entities/stock_item.dart';
+import 'package:test_app/domain/repositories/stock_repository.dart';
+import 'package:test_app/domain/usecases/get_stock_items.dart';
 
 class MockStockRepository extends Mock implements StockRepository {}
 
 void main() {
-  late GetStockItems usecase;
+  late GetStockItemsUsecase usecase;
   late MockStockRepository mockStockRepository;
 
   setUp(() {
     mockStockRepository = MockStockRepository();
-    usecase = GetStockItems(mockStockRepository);
+    usecase = GetStockItemsUsecase(mockStockRepository);
   });
 
   final tStockItems = [

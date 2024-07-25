@@ -2,10 +2,10 @@ import '../../domain/entities/stock_item.dart';
 
 class StockItemModel extends StockItem {
   StockItemModel({
-    required String name,
-    required String symbol,
-    required String firstKeyword,
-  }) : super(name: name, symbol: symbol, firstKeyword: firstKeyword);
+    required super.name,
+    required super.symbol,
+    required super.firstKeyword,
+  });
 
   factory StockItemModel.fromJson(Map<String, dynamic> json) {
     return StockItemModel(

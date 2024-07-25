@@ -8,7 +8,7 @@ class MockRemoteStockDataSourceImpl implements RemoteStockDataSource {
   @override
   Future<List<StockItemModel>> getStockItems() async {
     // Giả lập delay của network request
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
 
     // Trả về một danh sách mẫu các stock item
     return [

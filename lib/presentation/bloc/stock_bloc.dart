@@ -5,7 +5,7 @@ import 'stock_event.dart';
 import 'stock_state.dart';
 
 class StockBloc extends Bloc<StockEvent, StockState> {
-  final GetStockItems getStockItems;
+  final GetStockItemsUsecase getStockItems;
 
   StockBloc({required this.getStockItems}) : super(StockInitial()) {
     on<GetStockItemsEvent>((event, emit) async {

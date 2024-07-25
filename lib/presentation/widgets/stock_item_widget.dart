@@ -5,7 +5,7 @@ import '../../domain/entities/stock_item.dart';
 class StockItemWidget extends StatelessWidget {
   final StockItem stockItem;
 
-  const StockItemWidget({Key? key, required this.stockItem}) : super(key: key);
+  const StockItemWidget({super.key, required this.stockItem});
 
   @override
   Widget build(BuildContext context) {
